@@ -1,0 +1,41 @@
+<?php
+include "conn.php";
+//PREPARAR
+$stmt = $conn->prepare("SELECT *FROM student");
+
+//EXECUTAR
+$stmt->execute();
+
+//BUSCA
+$list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+var_dump($list);
+
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD - LISTA</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>Código</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Ações</th>
+        </tr>
+        <?php foreach($list as $user):  ?>
+        <tr>
+        <td><?= $user ['id']?></td>
+        <td><?= $user ['namebd']?></td>
+        <td><?= $user ['email']?></td>
+        <td>Editar | Excluir</td>
+        </tr>
+    <?php endforeach; ?>
+    </table>
+</body>
+</html>
